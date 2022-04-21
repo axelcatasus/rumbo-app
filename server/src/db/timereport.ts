@@ -15,7 +15,7 @@ export const getTimeReport = async ({email,year,month,project}: getTimeReportFil
         params['email'] = email ;
     }
     if (year && !month) {
-        params['time'] = {$gt: new Date(year, 0, 1), $lt: new Date(year+1, 0, 1)} 
+        params['time'] = {$gt: new Date(year, 0, 1), $lt: new Date(Number(year) + 1, 0, 1)} 
     }
     if (month && year) {
         params['time'] = {$gt: new Date(year, month-1, 1), $lt: new Date(year, month, 1)}

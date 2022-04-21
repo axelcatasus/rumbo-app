@@ -28,13 +28,13 @@ export const getTransactions = async ({
       queries['email'] = email
     }
     if(year && !month){
-      queries['year'] = {$gt: new Date(year, 0, 1), $lt: new Date(year+1, 0, 1)}
+      queries['time'] = {$gt: new Date(year, 0, 1), $lt: new Date(Number(year) + 1, 0, 1)}
     }
     if(month && year){
-      queries['month'] = {$gt: new Date(year, month-1, 1), $lt: new Date(year, month, 1)}
+      queries['time'] = {$gt: new Date(year, month-1, 1), $lt: new Date(year, month, 1)}
     }
     if(description){
-      queries['description'] = { '$regex' : '.*' + description + '.*', '$options' : 'i' }
+      queries['description'] = { $regex : description, $options : 'i' }
     }
   return await TransactionModel.find(queries);
 }
